@@ -1,0 +1,190 @@
+{% extends 'main.html' %}
+
+{% block  content%}  
+<section class="content-header">
+<div class=" offset-1 col-10 ">
+    <div class="container-fluid">
+        <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1>Record</h1>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item "><a href="{% url 'home' %}">Record</a></li>
+            <li class="breadcrumb-item active">Edit Record</li>
+            </ol>
+        </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</div>
+</section>
+
+<div class="row">
+  {% if form.errors %}
+    <div class="alert alert-danger">
+        {{ form.errors }}
+    </div>
+  {% endif %}
+    <div class=" offset-1 col-10 ">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Create New Record</h3>
+
+            <div class="card-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                  
+              </div>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <form class="form-horizontal" method="post" enctype="multipart/form-data">
+              {% csrf_token %}   
+            <div class="card-body">
+              <div class="form-group row">
+                <label for="id_record_id" class="col-sm-3 col-form-label">{{ form.record_id.label }}</label>                
+                <div class="col-sm-9">
+                   {{ form.record_id }}                  
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="id_company_code" class="col-sm-3 col-form-label">Company Code <sup>*</sup></label>
+                <div class="col-sm-9"> 
+                  {{ form.company_code }}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="id_functional_area" class="col-sm-3 col-form-label">Functional Area</label>
+                <div class="col-sm-9"> 
+              {{ form.functional_area }}
+ 
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="id_cost_center" class="col-sm-3 col-form-label">Cost Center</label>
+                <div class="col-sm-9"> 
+                  {{ form.cost_center }} 
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="id_plan_type" class="col-sm-3 col-form-label">Plan type</label>
+                <div class="col-sm-9">
+                  {{ form.plan_type }} 
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="id_year" class="col-sm-3 col-form-label">Year</label>
+                <div class="col-sm-9">
+                  {{ form.year }}  
+                </div>
+              </div> 
+
+              <div class="form-group row">
+                <label for="id_investment_priority" class="col-sm-3 col-form-label">Investment prioritization</label>
+                <div class="col-sm-9"> 
+                  {{ form.investment_priority }} 
+                </div>
+              </div> 
+
+              <div class="form-group row">
+                <label for="id_assets_type" class="col-sm-3 col-form-label">Asset type</label>
+                <div class="col-sm-9">
+                  {{ form.assets_type }} 
+                </div>
+              </div> 
+
+              <div class="form-group row">
+                <label for="id_capex_type" class="col-sm-3 col-form-label">Capex Type</label>
+                <div class="col-sm-9">
+                  {{ form.capex_type }} 
+                </div>
+              </div> 
+
+              <div class="form-group row">
+                <label for="id_preview_number" class="col-sm-3 col-form-label">Preview Number</label>
+                <div class="col-sm-9">
+                  {{ form.preview_number }}  
+                </div>
+              </div> 
+
+              <div class="form-group row">
+                <label for="id_asset_to_be_replace" class="col-sm-3 col-form-label">Asset to be replaced (SAP Number)</label>
+                <div class="col-sm-9">
+                  {{ form.asset_to_be_replace }}  
+                </div>
+              </div> 
+
+              <div class="form-group row">
+                <label for="id_expected_inverstment_value" class="col-sm-3 col-form-label">Expected Investment Value, EUR</label>
+                <div class="col-sm-3">
+                  {{ form.expected_inverstment_value }}  
+                </div>
+              </div> 
+
+              <div class="form-group row">
+                <label for="id_expected_servince_category" class="col-sm-3 col-form-label">Expected Savings Category</label>
+                <div class="col-sm-9">
+                  {{ form.expected_servince_category }} 
+                </div>
+              </div> 
+
+              <div class="form-group row">
+                <label for="id_expected_savings_value" class="col-sm-3 col-form-label">Expected Savings Value, EUR</label>
+                <div class="col-sm-9">
+                  {{ form.expected_savings_value }}  
+                </div>
+              </div> 
+
+              <div class="form-group row">
+                <label for="id_project_start_date" class="col-sm-3 col-form-label">Project Start Date</label>
+                <div class="col-sm-2">
+                  {{ form.project_start_date }}  
+                </div>
+              </div> 
+
+              <div class="form-group row">
+                <label for="id_project_end_date" class="col-sm-3 col-form-label">Project End Date</label>
+                <div class="col-sm-2">
+                  {{ form.project_end_date }}  
+                </div>
+              </div> 
+
+              <div class="form-group row">
+                <label for="id_status" class="col-sm-3 col-form-label">Status</label>
+                <div class="col-sm-9">
+                  {{ form.status }}
+                </div>
+              </div>
+
+              <div class="row">
+                        <div class=" offset-3 col-8">
+                            <div class="icheck-primary">
+                                {{  form.confirmation }}
+                                <label for="id_confirmation">
+                                I hereby declare that the provided above information is correct*
+                                </label>
+                            </div>
+                        </div>
+</div>
+
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <button type="submit" class="btn btn-info">Save</button>
+              <button type="submit" class="btn btn-default float-right">Cancel</button>
+            </div>
+            <!-- /.card-footer -->
+          </form>
+          <!-- /.card-body -->
+          <div class="card-footer">
+
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+    
+</div>
+
+{% endblock content %}

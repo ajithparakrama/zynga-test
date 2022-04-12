@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="register-page">
+<div class="register-box col-sm-6">
+ 
+    <div class="card">
+      <div class="card-body register-card-body">
+        <p class="login-box-msg">Register a new membership</p>
+  
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}  
+            {% for fields in form %} 
+              <div class="form-group row">
+                <label for="inputEmail3" class="  col-form-label">{{ fields.label }}</label>
+                <div class="col-sm-12">
+                  {{ fields }} 
+                </div>
+              </div> 
+            {% endfor %}
+ 
+    
+          <div class="row">
+           <!--  <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                <label for="agreeTerms">
+                 I agree to the <a href="#">terms</a>
+                </label>
+              </div>
+            </div> -->
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+  
+  
+        <a href="{% url 'login' %}" class="text-center">I already have a membership</a>
+      </div>
+      <!-- /.form-box -->
+    </div><!-- /.card -->
+</div>
+</div>
+{% endblock content %}

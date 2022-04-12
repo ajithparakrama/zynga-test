@@ -1,0 +1,120 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+                        <section class="content-header">
+                        <div class=" offset-1 col-10 ">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>All Records {{ request.user }} </h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">All Records</li>
+                                </ol>
+                            </div>
+                            </div>
+                        </div><!-- /.container-fluid -->
+                    </div>
+                        </section>
+
+                        <div class="row">
+          <div class=" offset-1 col-10 ">
+            
+            <div class="card">
+              <div class="card-header">
+               <!-- <h3 class="card-title">Responsive Hover Table</h3> -->
+               <a href="{% url 'newrecord' %}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New Record</a>
+               <a href="#" class="btn btn-sm btn-secondary"><i class="fa fa-file-excel"></i> Export</a>
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search"> 
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive ">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Data Record ID</th>
+                      <th>Company Code</th>
+                      <th>Functional Area</th>
+                      <th>Cost Cente</th>
+                      <th>Investment prioritization</th>
+                      <th>Asset type</th>
+                      <th>Capex Type</th>
+                      <th>Preview Number</th>
+                      <th>Asset to be replaced (SAP Number)</th>
+                      <th>Expected Investment Value, EUR</th>
+                      <th>Expected Savings Category</th>
+                      <th>Expected Savings Value, EUR</th>
+                      <th>Project Start Date</th>
+                      <th>Project End Date</th>
+                      <th>Status</th>
+                      <th>Approval</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for record in page_obj %}
+                    <tr>
+                      <td>{{ record.record_id }} </td> 
+                      <td>{{ record.company_code }}</td>  
+                      <td>{{ record.functional_area }}</td> 
+                      <td>{{ record.cost_center }}</td>  
+                      <td>{{ record.investment_priority }}</td> 
+                      <td>{{ record.assets_type }}</td>  
+                      <td>{{ record.capex_type }}</td> 
+                      <td>{{ record.preview_number }}</td>  
+                      <td>{{ record.asset_to_be_replace }}</td> 
+                      <td>{{ record.expected_inverstment_value }}</td>  
+                      <td>{{ record.expected_servince_category }}</td> 
+                      <td>{{ record.expected_savings_value }}</td>  
+                      <td>{{ record.project_start_date }}</td> 
+                      <td>{{ record.project_end_date }}</td>  
+                      <td>{{ record.status }}</td> 
+                      <td>{{ record.approve_status }}</td>  
+
+                      <td> 
+                        <a href="{% url 'editrecord' record.id %}" class="btn btn-sm btn-warning"><i class="fa fa-pencil-alt"></i>Edit</a>
+                      </td>
+                    </tr>
+                    <tr>
+
+                    {% endfor %}
+              
+                  </tbody>
+                </table>
+              </div>
+              
+              <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a class="paginate_button page-item previous "  href="?page=1">&laquo; first</a>
+                        <a class="paginate_button page-item previous "  href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+            
+                    {% if page_obj.has_next %}
+                        <a class="paginate_button page-item previous "  href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a class="paginate_button page-item previous "  href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+              <!-- <ul class="pagination"><li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+ </div>
+ {% endblock %}

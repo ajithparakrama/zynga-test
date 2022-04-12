@@ -1,0 +1,49 @@
+<nav class="  navbar navbar-expand-md navbar-light navbar-info text-sm">
+    <div class="container">
+
+        <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav  ">
+
+            </ul>
+
+        </div>
+
+        <!-- Right navbar links -->
+        <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto ">
+            <!-- Messages Dropdown Menu -->
+            <li class="nav-item  ">
+                <a class="nav-link text-white"  href="{% url 'home' %}">Home</a>                             
+            </li>
+         <!--   <li class="nav-item  ">
+                <a class="nav-link"  href="login.php">Change Log</a>                             
+            </li> -->
+            <li class="nav-item  ">
+                <a class="nav-link text-white"  href="{% url 'about' %}">About</a>                             
+            </li>
+            
+            
+                {% if request.user.is_authenticated %}
+                <li class="nav-item  ">
+                    <a class="nav-link text-white"  href="{% url 'profile' %}">Profile</a>                             
+                </li>
+                
+                <li>
+                <a class="nav-link text-white"  href="{% url 'profile' %}">
+                 Hello {{ request.user }} 
+                </a>
+                 {% endif %} 
+            <li class="nav-item "> 
+                {% if request.user.is_authenticated %} 
+                <a class="nav-link text-white" data-widget="control-sidebar" data-slide="true" href="{% url 'logout' %}" role="button">Logout</a>
+                {% else %} 
+                <a class="nav-link text-white" data-widget="control-sidebar" data-slide="true" href="{% url 'login' %}" role="button">Login</a>
+                {% endif %} 
+            </li>
+        </ul>
+    </div>
+</nav> 

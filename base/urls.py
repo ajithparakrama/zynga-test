@@ -11,6 +11,6 @@ urlpatterns = [
     path('fogot/', views.fogot, name="fogot"),
     path('profile/', views.profile, name="profile"),
     path('newrecord/', views.newrecord  , name="newrecord"),
-    path('editrecord/', views.editrecord, name="editrecord"),
+    path('editrecord/<str:pk>/', views.editrecord, name="editrecord"),
     path('approverecord/<str:pk>/', views.approverecord, name="approverecord"),
 ]

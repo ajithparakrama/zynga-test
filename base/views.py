@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout 
 from .models import record, User
-from .forms import RecordForm,  MyUserCreationForm 
+from .forms import RecordForm,  MyUserCreationForm, userForm,UserChangeForm
 from .table import RecordTable 
 
 
@@ -64,7 +64,9 @@ def about(request):
     return render(request,'base/about.html')
 
 def profile(request):
-    return render(request,)
+    form = UserChangeForm(instance=request.user)
+    
+    return render(request, 'base/profile.html',{'form':form})
  
 @login_required(login_url='login')
 def home(request):    

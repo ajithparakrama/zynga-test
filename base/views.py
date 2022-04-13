@@ -85,7 +85,7 @@ def home(request):
 @login_required(login_url='login')
 def allview(request):
     table = RecordTable(record.objects.all())
-    table.paginate(page=request.GET.get("page", 1), per_page=2)
+    table.paginate(page=request.GET.get("page", 1), per_page=20)
     return render(request, "base/records.html", {
         "table": table
     })

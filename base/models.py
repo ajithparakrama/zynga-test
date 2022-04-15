@@ -2,57 +2,67 @@ from email.policy import default
 from statistics import mode
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from simple_history.models import HistoricalRecords
 
 class User(AbstractUser):
     user_type = models.BooleanField(default=False)
     avatar = models.ImageField(null=True,default='avatar.svg')
+    history = HistoricalRecords()
 
 
 
 class Plan_Type(models.Model):
     name = models.CharField(max_length=200)
+    history = HistoricalRecords()
 
     def __str__(self):
         return self.name
    
 class Functional_area(models.Model):
     name=models.CharField(max_length=30)
+    history = HistoricalRecords()
     
     def __str__(self):
         return self.name    
     
 class Investment_priority(models.Model):
     name=models.CharField(max_length=30)
+    history = HistoricalRecords()
     
     def __str__(self):
         return self.name    
 
 class Assets_Type(models.Model):
     name=models.CharField(max_length=30)
+    history = HistoricalRecords()
     
     def __str__(self):
         return self.name    
     
 class Capex_Type(models.Model):
     name=models.CharField(max_length=30)
+    history = HistoricalRecords()
     
     def __str__(self):
         return self.name    
     
 class Expected_Servince(models.Model):
     name=models.CharField(max_length=30)
+    history = HistoricalRecords()
     
     def __str__(self):
         return self.name    
     
 class Status(models.Model):
     name=models.CharField(max_length=20)
+    history = HistoricalRecords()
     
     def __str__(self):
         return self.name    
 
 class Approve_Status(models.Model):
     name=models.CharField(max_length=20)
+    history = HistoricalRecords()
     
     def __str__(self):
         return self.name
@@ -81,6 +91,7 @@ class record(models.Model):
     approve_time = models.DateTimeField(null=True)  
     approve_status = models.ForeignKey(Approve_Status, on_delete=models.SET_NULL, null=True)
     confirmation = models.BooleanField(default=False,null=False)
+    history = HistoricalRecords()
     
     class Meta:
         ordering = ['-updated','-created']

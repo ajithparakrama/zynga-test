@@ -27,9 +27,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
-  #  'django_filters',
-    'django_tables2'
+    'django_filters',
+    'django_tables2',
+    'simple_history'
 ]
+ 
 
 AUTH_USER_MODEL = 'base.User'
 
@@ -41,6 +43,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'zynga.urls'

@@ -14,6 +14,7 @@
                 <label for="inputEmail3" class="  col-form-label">{{ fields.label }}</label>
                 <div class="col-sm-12">
                   {{ fields }} 
+                  <spam class="text-danger">{{fields.errors}}</spam> 
                 </div>
               </div> 
             {% endfor %}
@@ -29,9 +30,8 @@
               </div>
             </div> -->
             <!-- /.col -->
-            <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Register</button>
-            </div>
+            
+              <button type="submit" class="btn btn-primary btn-block">Register</button> 
             <!-- /.col -->
           </div>
         </form>

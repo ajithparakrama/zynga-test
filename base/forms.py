@@ -39,3 +39,8 @@ class UserChangeForm(UserChangeForm):
         model = User
         
         fields = ['avatar', 'first_name','last_name','email']
+
+class UserChangeFormAdmin(UserChangeForm):
+    class Meta:
+        model = User        
+        fields = ['first_name','last_name','email','user_type']

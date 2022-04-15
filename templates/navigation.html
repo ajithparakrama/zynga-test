@@ -33,9 +33,11 @@
                 </li>
                 
                 <li>
-                <a class="nav-link text-white"  href="{% url 'profile' %}">
-                 Hello {{ request.user }} 
-                </a>
+                    {% if request.user.user_type == True %}
+                <a class="nav-link text-white"  href="{% url 'user-accounts' %}">
+                  User Management
+                </a>    
+                    {% endif %}
                  {% endif %} 
             <li class="nav-item "> 
                 {% if request.user.is_authenticated %} 

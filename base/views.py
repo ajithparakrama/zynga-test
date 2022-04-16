@@ -124,10 +124,19 @@ def newrecord(request):
     
     if request.method=='POST':
         form = RecordForm(request.POST)
+        
         if form.is_valid():            
-            record = form.save(commit=False)
-            record.create_by = request.user
-            record.save()
+            rc = form.save(commit=False)
+            REC_ID = str(rc.cost_center)+str(rc.year)
+            rc.create_by = request.user
+            rc.record_id = str(rc.cost_center)+str(rc.year)
+            rc.save()
+         #   return  HttpResponse(record.objects.latest('id').id)
+            ltid = record.objects.latest('id').id
+            er = record.objects.get(id=ltid)
+            er.record_id +=str(ltid)
+            er.save()
+            
             return redirect('home')
     context = {'form':form}
     return render(request, 'base/createRecord.html',context)
@@ -147,7 +156,7 @@ def editrecord(request, pk):
             form.save()
             return redirect('home')
             
-    context = {'form':form}
+    context = {'form':form,'record':er}
     return render(request, 'base/editRecord.html',context)
 
 @login_required(login_url='login')
@@ -211,6 +220,8 @@ def edit_user(request, pk):
 
 
 def password_reset_request(request):
+    password_reset_form = PasswordResetForm()
+    message = ''
     if request.method == "POST":
         password_reset_form = PasswordResetForm(request.POST)
         if password_reset_form.is_valid():
@@ -235,36 +246,11 @@ def password_reset_request(request):
                     except BadHeaderError:
                         return HttpResponse('Invalid header found.')
                     return redirect ("/password_reset/done/")
-    password_reset_form = PasswordResetForm()
-    return render(request=request, template_name="password/password_reset.html", context={"password_reset_form":password_reset_form})
-
-def password_reset_request(request):
-    if request.method == "POST":
-            password_reset_form = PasswordResetForm(request.POST)
-            if password_reset_form.is_valid():
-                data = password_reset_form.cleaned_data['email']
-                associated_users = User.objects.filter(Q(email=data))
-                if associated_users.exists():
-                    for user in associated_users:
-                        subject = "Password Reset Requested"
-                        email_template_name = "main/password/password_reset_email.txt"
-                        c = {
-                        "email":user.email,
-                        'domain':'127.0.0.1:8000',
-                        'site_name': 'Website',
-                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                        'token': default_token_generator.make_token(user),
-                        'protocol': 'http',
-                        }
-                        email = render_to_string(email_template_name, c)
-                        try:
-                            send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
-                        except BadHeaderError:
-
-                            return HttpResponse('Invalid header found.')
-                           
-                        messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
-                        return redirect ("main:homepage")
+            else:
+                 message = 'Such email address is not registered '
+                    
+                
     
-    password_reset_form = PasswordResetForm()
-    return render(request=request, template_name="main/password/password_reset.html", context={"password_reset_form":password_reset_form})
+    return render(request=request, template_name="password/password_reset.html", context={"password_reset_form":password_reset_form, 'message':message})
+
+ 

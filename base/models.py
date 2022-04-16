@@ -8,6 +8,7 @@ class User(AbstractUser):
     user_type = models.BooleanField(default=False)
     avatar = models.ImageField(null=True,default='avatar.svg')
     history = HistoricalRecords()
+    email = models.EmailField(unique=True)
 
 
 

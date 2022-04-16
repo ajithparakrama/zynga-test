@@ -9,7 +9,7 @@ class RecordForm(ModelForm):
     class Meta:
         model = record
         fields = '__all__'
-        exclude = ['create_by','approve_time','approve_status']
+        exclude = ['create_by','approve_time','approve_status','record_id']
       #  fields = ('record_id', 'company_code', 'functional_area_id')
       #  widgets = {
       #      'record_id': CharField(attrs={'class': 'form-control', 'placeholder': 'Record Id'}),

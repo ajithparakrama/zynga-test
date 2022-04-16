@@ -29,7 +29,13 @@
                                 <a  href="#" ><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                               </div>
                         </div>
-                        <spam class="text-danger">{{fields.errors}}</spam> 
+                        {% if messages %}
+                        <ul class="text-danger">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                     {% endif %}
                     </div>
                     <div class="row">
                         <div class="col-12">

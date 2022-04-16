@@ -41,9 +41,9 @@
               {% csrf_token %}   
             <div class="card-body">
               <div class="form-group row">
-                <label for="id_record_id" class="col-sm-3 col-form-label">{{ form.record_id.label }}</label>                
+                <label for="id_record_id" class="col-sm-3 col-form-label">Record Id</label>                
                 <div class="col-sm-9">
-                   {{ form.record_id }}                  
+                   <input type="text" disabled placeholder="Automaticaly Genarated" />       
                 </div>
               </div>
               <div class="form-group row">
@@ -171,8 +171,8 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-              <button type="submit" class="btn btn-info">Save</button>
-              <a  href="{% url 'home' %}" class="btn btn-default float-right">Cancel</a>
+              <button type="submit" class="btn btn-info">Send for approval </button>
+              <a  href="{% url 'home' %}" class="btn btn-default float-right">Cancel </a>
             </div>
             <!-- /.card-footer -->
           </form>
@@ -185,5 +185,9 @@
       </div>
     
 </div>
-
+<script>
+  $(document).ready(function() {
+    console.log('sd');
+  });
+</script>
 {% endblock content %}

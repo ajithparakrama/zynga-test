@@ -27,14 +27,10 @@
   {% endif %}
     <div class=" offset-1 col-10 ">
         <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Create New Record</h3>
-
-            <div class="card-tools">
-              <div class="input-group input-group-sm" style="width: 150px;">
-                  
-              </div>
-            </div>
+          <div class="card-header    text-center">
+          <div class="col-sm-12">   <h3 class="h5">Create New Record</h3>
+          </div>
+            
           </div>
           <!-- /.card-header -->
           <form class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -170,24 +166,35 @@
 
             </div>
             <!-- /.card-body -->
-            <div class="card-footer">
-              <button type="submit" class="btn btn-info">Send for approval </button>
-              <a  href="{% url 'home' %}" class="btn btn-default float-right">Cancel </a>
+            <div class="card-footer text-center">
+              <a  href="{% url 'home' %}" class="btn btn-default btn-sm col-sm-2"> Cancel </a>
+              <button type="submit" class="btn btn-primary btn-sm col-sm-2"> Send for approval </button>
+              
             </div>
             <!-- /.card-footer -->
           </form>
-          <!-- /.card-body -->
-          <div class="card-footer">
-
-          </div>
         </div>
         <!-- /.card -->
       </div>
     
-</div>
-<script>
-  $(document).ready(function() {
-    console.log('sd');
-  });
-</script>
+</div> 
 {% endblock content %}
+
+{% block extrscripst %}
+<script>
+    var from_fields = document.getElementsByTagName('input') 
+    from_fields[1].placeholder = "AB7E.XXXXX2022n";
+    from_fields[2].placeholder = "AB7E";
+    from_fields[3].placeholder = " AB7E.XXXXX";
+    from_fields[4].placeholder = "YYYY";
+    from_fields[5].placeholder = "15002018";
+    from_fields[6].placeholder="15002018";
+    from_fields[7].placeholder="123456789";
+    from_fields[8].placeholder="123456789";
+
+    for (field in from_fields){
+     // from_fields[field].className +=' text'; 
+    }
+
+</script>
+{% endblock extrscripst%}

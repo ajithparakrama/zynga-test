@@ -5,19 +5,67 @@
  
     <div class="card">
       <div class="card-body register-card-body">
-        <p class="login-box-msg">Register a new membership</p>
+        <p class="login-box-msg">Create new account</p>
   
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}  
             {% for fields in form %} 
-              <div class="form-group row">
+           <!--    <div class="form-group row">
                 <label for="inputEmail3" class="  col-form-label">{{ fields.label }}</label>
                 <div class="col-sm-12">
                   {{ fields }} 
                   <spam class="text-danger">{{fields.errors}}</spam> 
                 </div>
-              </div> 
+              </div>  -->
             {% endfor %}
+
+            <div class="form-group row">
+              <label for="inputEmail3" class="  col-form-label">{{ form.username.label }} (Code 1): </label>
+              <div class="col-sm-12">
+                {{ form.username }} 
+                <spam class="text-danger">{{form.username.errors}}</spam> 
+              </div>
+            </div> 
+
+            <div class="form-group row">
+              <label for="inputEmail3" class="  col-form-label">{{ form.first_name.label }}</label>
+              <div class="col-sm-12">
+                {{ form.first_name }} 
+                <spam class="text-danger">{{form.first_name.errors}}</spam> 
+              </div>
+            </div> 
+
+            <div class="form-group row">
+              <label for="inputEmail3" class="  col-form-label">{{ form.last_name.label }}</label>
+              <div class="col-sm-12">
+                {{ form.last_name }} 
+                <spam class="text-danger">{{form.last_name.errors}}</spam> 
+              </div>
+            </div> 
+
+            <div class="form-group row">
+              <label for="inputEmail3" class="  col-form-label">{{ form.email.label }}</label>
+              <div class="col-sm-12">
+                {{ form.email }} 
+                <spam class="text-danger">{{form.email.errors}}</spam> 
+              </div>
+            </div> 
+
+            <div class="form-group row">
+              <label for="inputEmail3" class="  col-form-label">{{ form.password1.label }}</label>
+              <div class="col-sm-12">
+                {{ form.password1 }} 
+                <spam class="text-danger">{{form.password1.errors}}</spam> 
+              </div>
+            </div> 
+
+            <div class="form-group row">
+              <label for="inputEmail3" class="  col-form-label">{{ form.password2.label }}</label>
+              <div class="col-sm-12">
+                {{ form.password2 }} 
+                <spam class="text-danger">{{form.password2.errors}}</spam> 
+              </div>
+            </div> 
  
     
           <div class="row">
@@ -31,16 +79,34 @@
             </div> -->
             <!-- /.col -->
             
-              <button type="submit" class="btn btn-primary btn-block">Register</button> 
+              <button type="submit" class="btn btn-primary btn-block btn-sm">Register</button> 
             <!-- /.col -->
           </div>
         </form>
   
   
-        <a href="{% url 'login' %}" class="text-center">I already have a membership</a>
+        <a href="{% url 'login' %}" class="text-center">Already have an account? Login</a>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->
 </div>
 </div>
 {% endblock content %}
+
+{% block extrscripst %}
+<script>
+    var from_fields = document.getElementsByTagName('input') 
+    from_fields[1].placeholder = "CODE1";
+    from_fields[2].placeholder = "Aaaaaaa";
+    from_fields[3].placeholder = "Aaaaaaa";
+    from_fields[4].placeholder = "***@company.com";
+    from_fields[5].placeholder = "Aaa111!";
+    from_fields[6].placeholder="Repeat password"
+
+    for (field in from_fields){
+     // from_fields[field].className +=' text'; 
+    }
+
+</script>
+{% endblock extrscripst%}
+

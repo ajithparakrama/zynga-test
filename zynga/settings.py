@@ -30,8 +30,9 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'django_filters',
     'django_tables2',
-    'simple_history',
-    'crispy_forms'
+ #   'simple_history',
+    'crispy_forms', 
+    'bootstrap3'
 ]
  
 
@@ -45,7 +46,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'simple_history.middleware.HistoryRequestMiddleware',
+ #   'simple_history.middleware.HistoryRequestMiddleware',
   #  "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
@@ -80,6 +81,17 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {  
+    #     'ENGINE': 'django.db.backends.mysql',  
+    #     'NAME': 'capex',  
+    #     'USER': 'root',  
+    #     'PASSWORD': '',  
+    #     'HOST': '127.0.0.1',  
+    #     'PORT': '3306',  
+    #     'OPTIONS': {  
+    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+    #    }  
+    # }
 }
 
 
@@ -136,6 +148,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 INTERNAL_IPS = [
     # ...
-  #  "127.0.0.1",
+    "127.0.0.1",
     # ...
 ]

@@ -88,7 +88,7 @@ class record(models.Model):
     status = models.ForeignKey(Status,on_delete=models.SET_NULL,null=True)    
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    create_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True) 
+    create_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True ) 
     approve_time = models.DateTimeField(null=True)  
     approve_status = models.ForeignKey(Approve_Status, on_delete=models.SET_NULL, null=True)
     confirmation = models.BooleanField(default=False,null=False)

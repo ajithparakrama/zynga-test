@@ -9,14 +9,18 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout 
 from .models import record, User
 from .forms import RecordForm,  MyUserCreationForm, userForm,UserChangeForm, RecordApproveForm,UserChangeFormAdmin
-from .table import RecordTable, RecordTableAdmin,AdminUsers
+from .table import RecordTable, RecordTableAdmin,AdminUsers,PersonTable
 from django.contrib.auth.forms import PasswordResetForm
 from django.core.mail import send_mail, BadHeaderError
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
-from django.utils.encoding import force_bytes
-
+from django.utils.encoding import force_bytes 
+from .filters import RecordsFilter
+#import django_tables2 as tables
+from django_filters.views import FilterView
+from django_tables2.views import SingleTableMixin
+from django_tables2.export.views import ExportMixin  
 
 
 
@@ -93,18 +97,34 @@ def changepass(request):
     return render(request,'base/change-password.html',{'form':form})
  
 @login_required(login_url='login')
-def allview(request):
-    
+#def allview(AjaxDatatableView):
+    # model = record
+    # title = 'Permissions'
+    # initial_order = [["record_id", "asc"], ]
+    # length_menu = [[10, 20, 50, 100, -1], [10, 20, 50, 100, 'all']]
+    # search_values_separator = '+'
+
+    # column_defs = [
+    #     AjaxDatatableView.render_row_tools_column_def(),
+    #     {'name': 'record_id', 'visible': False, },
+    #     {'name': 'company_code', 'visible': True, },
+    #     {'name': 'year', 'visible': True, },
+    #     {'name': 'cost_center', 'foreign_field': 'content_type__app_label', 'visible': True, },
+    #     {'name': 'functional_area', 'foreign_field': 'content_type__model', 'visible': True, },
+    # ]
+def allview(request):    
     if request.user.user_type==True:
-        #
+        
         try:
             table = RecordTableAdmin(record.objects.all())
+            rfilter = RecordsFilter()
             table.paginate(page=request.GET.get("page", 1), per_page=20)
         except:
             table = None
+            rfilter = RecordsFilter()     
             
-        return render(request, "base/allrecords.html", {
-            "table": table
+        return render(request, "base/records.html", {
+            "table": table,"rfilter":rfilter
         })
     else:
         try:
@@ -112,11 +132,18 @@ def allview(request):
             table.paginate(page=request.GET.get("page", 1), per_page=20)
         except:
             table = None
-            
+        rfilter = RecordsFilter()     
         return render(request, "base/records.html", {
-            "table": table
+            "table": table,"rfilter":rfilter
         }) 
 
+class FilteredPersonListView(ExportMixin, SingleTableMixin, FilterView):
+    table_class = PersonTable
+    model = record
+    template_name = "template.html"
+
+    filterset_class = RecordsFilter
+        
 
 @login_required(login_url='login')
 def newrecord(request):

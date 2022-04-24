@@ -23,11 +23,11 @@
     <div class=" offset-3 col-6 ">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Edit My Profile</h3>
+          <h3 class="card-title">Update profile</h3>
 
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
-              <a href="{% url 'change-password' %}" class="btn btn-sm btn-info">Change Password</a>
+              <a href="{% url 'change-password' %}" class="btn btn-sm btn-primary">Change Password</a>
             </div>
           </div>
         </div>
@@ -39,8 +39,8 @@
             {% csrf_token %}  
             {% for fields in form %} 
               <div class="form-group row">
-                <label for="inputEmail3" class="  col-form-label">{{ fields.label }}</label>
-                <div class="col-sm-12">
+                <label for="inputEmail3" class=" col-sm-3 col-form-label">{{ fields.label }}</label>
+                <div class="col-sm-9">
                   {{ fields }} 
                 </div>
               </div> 
@@ -48,16 +48,13 @@
  
           </div>
           <!-- /.card-body -->
-          <div class="card-footer">
-            <button type="submit" class="btn btn-info">Update</button>
-            <button type="submit" class="btn btn-default float-right">Cancel</button>
+          <div class="card-footer text-center">
+            <a href="{% url 'home' %}" class="btn btn-default btn-sm col-sm-2">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-sm col-sm-2"> Update </button>
+            
           </div>
           <!-- /.card-footer -->
-        </form>
-        <!-- /.card-body -->
-        <div class="card-footer">
-
-        </div>
+        </form> 
       </div>
       <!-- /.card -->
     </div>
